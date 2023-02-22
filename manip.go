@@ -1,5 +1,18 @@
 package boolal
 
+const (
+	truth   = "■"
+	falsity = "□"
+)
+
+func Truth() UnaryOp {
+	return Var(truth)
+}
+
+func Falsity() UnaryOp {
+	return Var(falsity)
+}
+
 func asUnaryOp(term any) UnaryOp {
 	switch v := term.(type) {
 	case string:
