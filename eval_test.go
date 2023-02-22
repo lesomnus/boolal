@@ -19,6 +19,16 @@ func TestEval(t *testing.T) {
 		expected bool
 	}{
 		{
+			desc:     "truth",
+			input:    &ba.Expr{Lhs: ba.Truth()},
+			expected: true,
+		},
+		{
+			desc:     "falsity",
+			input:    &ba.Expr{Lhs: ba.Falsity()},
+			expected: false,
+		},
+		{
 			desc:     "true",
 			input:    &ba.Expr{Lhs: ba.Var("t")},
 			expected: true,

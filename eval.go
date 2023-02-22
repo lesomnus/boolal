@@ -21,9 +21,16 @@ func eval(data map[string]bool, op UnaryOp, opt EvalOption) bool {
 		return neg != op.Al.Eval(data, WithOption(opt))
 	}
 
-	v, ok := data[op.Var]
-	if !ok {
-		v = opt.FallbackValue
+	var v, ok bool
+	switch op.Var {
+	case truth:
+		v = true
+	case falsity:
+		v = false
+	default:
+		if v, ok = data[op.Var]; !ok {
+			v = opt.FallbackValue
+		}
 	}
 
 	return neg != v

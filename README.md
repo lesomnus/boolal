@@ -11,9 +11,20 @@ Evaluate a boolean expression.
 ```go
 import ba "github.com/lesomnus/boolal"
 
-func init(){
+func Expression() {
 	data := map[string]bool{"t": true}
-	expr := ba.ParseString("t & f | !(t | f)")
+	expr, err := ba.ParseString("t & f | !(t | f)")
+	if err != nil {
+		panic(err)
+	}
+
+	ok := expr.Eval(data)
+	// ok == false
+}
+
+func Manipulation() {
+	data := map[string]bool{"t": true}
+	expr := ba.And("t", "f").Or(ba.Not(ba.Or("t", "f")))
 
 	ok := expr.Eval(data)
 	// ok == false
